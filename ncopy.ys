@@ -12,7 +12,7 @@
 # Function prologue.
 # %rdi = src, %rsi = dst, %rdx = len
 ncopy:
-
+asdfasdffasd
 ##################################################################
 # You can modify this portion
 	# Loop header
