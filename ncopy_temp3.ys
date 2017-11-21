@@ -16,120 +16,134 @@ ncopy:
 # You can modify this portion
 	# Loop header
 	xorq %rax,%rax		# count = 0;
-Test8:
-	iaddq $-8, %rdx  #len 10
-	jge Over8 #len >=10
+Test10:
+	iaddq $-10, %rdx  #len 10
+	jge Over10 #len >=10
 Test3:
-	iaddq $5, %rdx #len 1
-	jge Over3 #3<= len <10
+	iaddq $7, %rdx #len 1
+	jge Over3 #3<= len <=10
 Test2:
-	iaddq $2, %rdx #len
-	je Exact1 #len==1
+	iaddq $1, %rdx #len
 	jg Exact2
+	je Exact1 #len==1
 	ret #len ==0
-Over8:
+Over10:
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos1		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos1:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos2		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos2:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos3		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos3:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos4		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos4:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos5		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos5:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos6		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos6:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos7		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos7:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos8		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos8:
+Npos8:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
-	jmp Test8
+	mrmovq (%rdi), %r10	# read val from src...
+	rmmovq %r10, (%rsi)	# ...and store it to dst
+	andq %r10, %r10		# val <= 0?
+	jle Npos9		# if so, goto Npos:
+	iaddq $1, %rax		# count++
+Npos9:	
+	iaddq $8, %rdi
+	iaddq $8, %rsi
+	mrmovq (%rdi), %r10	# read val from src...
+	rmmovq %r10, (%rsi)	# ...and store it to dst
+	andq %r10, %r10		# val <= 0?
+	jle Npos10		# if so, goto Npos:
+	iaddq $1, %rax		# count++
+Npos10:
+	iaddq $8, %rdi
+	iaddq $8, %rsi
+	jmp Test10
+
 Over3:
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos11		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos11:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos12		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos12:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos13		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos13:	
+	iaddq $8, %rdi
 	iaddq $8, %rsi
-	iaddq $5, %rdx #len 1
-	iaddq $-8, %rdx
-	jge Over3 #3<= len <10
-	jmp Test2	
+	jmp Test3	
 Exact2:
 	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
 	rmmovq %r10, (%rsi)	# ...and store it to dst
 	andq %r10, %r10		# val <= 0?
 	jle Npos14		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos14:
+	iaddq $8, %rdi
 	iaddq $8, %rsi
 Exact1:
 	mrmovq (%rdi), %r10	# read val from src...
