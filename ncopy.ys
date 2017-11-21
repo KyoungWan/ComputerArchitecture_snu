@@ -28,100 +28,91 @@ Test2:
 	jg Exact2
 	ret #len ==0
 Over8:
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+	mrmovq (%rdi), %r8
+	mrmovq 0x08(%rdi), %r9
+	mrmovq 0x10(%rdi), %r10
+	mrmovq 0x18(%rdi), %r11
+	mrmovq 0x20(%rdi), %r12
+	mrmovq 0x28(%rdi), %r13
+	mrmovq 0x30(%rdi), %r14
+	mrmovq 0x38(%rdi), %rcx
+
+	rmmovq %r8, (%rsi)
+	rmmovq %r9, 0x08(%rsi)
+	rmmovq %r10, 0x10(%rsi)
+	rmmovq %r11, 0x18(%rsi)
+	rmmovq %r12, 0x20(%rsi)
+	rmmovq %r13, 0x28(%rsi)
+	rmmovq %r14, 0x30(%rsi)
+	rmmovq %rcx, 0x38(%rsi)
+
+	andq %r8, %r8		# val <= 0?
 	jle Npos1		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos1:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+Npos1:
+	andq %r9, %r9		# val <= 0?
 	jle Npos2		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos2:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
+Npos2:
 	andq %r10, %r10		# val <= 0?
 	jle Npos3		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos3:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+Npos3:
+	andq %r11, %r11		# val <= 0?
 	jle Npos4		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos4:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+Npos4:
+	andq %r12, %r12		# val <= 0?
 	jle Npos5		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos5:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+Npos5:
+	andq %r13, %r13		# val <= 0?
 	jle Npos6		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos6:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+Npos6:
+	andq %r14, %r14		# val <= 0?
 	jle Npos7		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos7:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
+Npos7:
+	andq %rcx, %rcx		# val <= 0?
 	jle Npos8		# if so, goto Npos:
 	iaddq $1, %rax		# count++
 Npos8:
-	iaddq $8, %rsi
+	iaddq $64, %rdi
+	iaddq $64, %rsi
 	jmp Test8
+
 Over3:
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
+	mrmovq (%rdi), %r8
+	mrmovq 0x08(%rdi), %r9
+	mrmovq 0x10(%rdi), %r10
+	
+	rmmovq %r8, (%rsi)
+	rmmovq %r9, 0x08(%rsi)
+	rmmovq %r10, 0x10(%rsi)
+
+	andq %r8, %r8		# val <= 0?
+	jle Npos9		# if so, goto Npos:
+	iaddq $1, %rax		# count++
+Npos9:
+	andq %r9, %r9		# val <= 0?
+	jle Npos10		# if so, goto Npos:
+	iaddq $1, %rax		# count++
+Npos10:
 	andq %r10, %r10		# val <= 0?
 	jle Npos11		# if so, goto Npos:
 	iaddq $1, %rax		# count++
-Npos11:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
-	jle Npos12		# if so, goto Npos:
-	iaddq $1, %rax		# count++
-Npos12:	
-	iaddq $8, %rsi
-	mrmovq (%rdi), %r10	# read val from src...
-	iaddq $8, %rdi
-	rmmovq %r10, (%rsi)	# ...and store it to dst
-	andq %r10, %r10		# val <= 0?
-	jle Npos13		# if so, goto Npos:
-	iaddq $1, %rax		# count++
-Npos13:	
-	iaddq $8, %rsi
-	iaddq $5, %rdx #len 1
-	iaddq $-8, %rdx
-	jge Over3 #3<= len <10
-	jmp Test2	
+Npos11:
+	iaddq $24, %rdi
+	iaddq $24, %rsi
+
+	iaddq $-3, %rdx
+	jge Over3
+	jmp Test2
+
+	#jmp Test3
+	#iaddq $5, %rdx #len 1
+	#jge Over3 #3<= len <10
 Exact2:
 	mrmovq (%rdi), %r10	# read val from src...
 	iaddq $8, %rdi
